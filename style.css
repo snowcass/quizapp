@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -7,33 +7,33 @@
 }
 
 :root {
-    --bg-color: #f4f6fa;
-    --purple: #a729f5;
-    --primary-text-color: #313e51;
-    --secondary-text-color: #626c7f;
-    --button-bg: #fff;
-    --shadow: 0px 16px 40px 0px rgba(143, 160, 193, 0.14);
-    --bg-html: #fff1e9;
-    --bg-css: #e0fdef;
-    --bg-javascript: #ebf0ff;
-    --bg-acessibilidade: #f6e7ff;
-    --white: #fff;
+    --bg-color: #F4F6FA;
+    --white: #FFF;
+    --purple:#A729F5;
+    --primary-text-color: #313E51;
+    --secundary-text-color: #626C7F;
+    --shadow: 0px 26px 40px 0px rgba(143, 160, 193, 0.14);
+    --bg-html: #FFF1E9;
+    --bg-css: #E0FDEF;
+    --bg-javascript: #EBF0FF;
+    --bg-acessibilidade: #F6E7FF;
+    --button-bg: #FFF;
     --bg-mobile: url(./assets/images/pattern-background-mobile-light.svg);
-    --bg-desktop: url(./assets/images/pattern-background-desktop-light.svg);
+    --bg-desktop: url(./assets/images/pattern-background-desktop-light.svg)
 }
 
 body.escuro {
-    --bg-color: #313e51;
+    --bg-color: #313E51;
     --bg-mobile: url(./assets/images/pattern-background-mobile-dark.svg);
     --bg-desktop: url(./assets/images/pattern-background-desktop-dark.svg);
-    --primary-text-color: #fff;
-    --secondary-text-color: #abc1e1;
-    --button-bg: #3b4d66;
+    --primary-text-color: #FFF;
+    --secundary-text-color: #ABC1E1;
+    --button-bg: #3B4D66;
     --shadow: 0px 16px 40px 0px rgba(49, 62, 81, 0.14);
 }
 
 body {
-    height: 100svh;
+    height: 90svh;
     background: var(--bg-mobile) var(--bg-color);
     background-repeat: no-repeat;
     background-size: cover;
@@ -43,8 +43,6 @@ header {
     padding: 16px 24px;
     display: flex;
     justify-content: flex-end;
-    max-width: 1160px;
-    margin-inline: auto;
 }
 
 .tema {
@@ -77,14 +75,10 @@ header {
 }
 
 main {
-    padding: 32px 24px;
+    padding: 32px;
 }
 
-.boas_vindas {
-    margin-bottom: 40px;
-}
-
-.boas_vindas h1{
+.boas_vindas h1 {
     font-size: 40px;
     font-weight: 300;
     color: var(--primary-text-color);
@@ -97,10 +91,11 @@ main {
 }
 
 .boas_vindas p {
-    color: var(--secondary-text-color);
+    color: var(--secundary-text-color);
     font-size: 14px;
     line-height: 150%;
     font-style: italic;
+    margin-bottom: 40px;
 }
 
 .assuntos {
@@ -135,19 +130,19 @@ main {
     width: 100%;
 }
 
-.botao_html div {
+.botao_html {
     background: var(--bg-html);
 }
 
-.botao_css div {
+.botao_css {
     background: var(--bg-css);
 }
 
-.botao_javascript div {
+.botao_javascript {
     background: var(--bg-javascript);
 }
 
-.botao_acessibilidade div {
+.botao_acessibilidade {
     background: var(--bg-acessibilidade);
 }
 
@@ -160,14 +155,16 @@ main {
 
     header {
         margin-block: 81px;
-    }
-
+        max-width: 1160px;
+        margin-inline: auto; 
+    } 
+    /* ajuste feito */
     .tema {
         gap: 16px;
     }
 
     .tema img {
-        width: 24px;
+        width: 16px;
     }
 
     .tema button {
@@ -177,7 +174,7 @@ main {
 
     .tema button div {
         width: 20px;
-        height: 20px;
+        height: 20px; 
     }
 
     main {
@@ -208,7 +205,7 @@ main {
         padding: 20px;
         gap: 32px;
     }
-
+    
     .assuntos button div {
         width: 56px;
         height: 56px;
