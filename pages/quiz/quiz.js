@@ -7,6 +7,9 @@ const assunto = localStorage.getItem("assunto")
 let quiz = {}
 let pontos = 0
 let pergunta = 1
+let resposta  = ""
+let idInputResposta = ""
+let respostaCorretaId = ""
 
 botaoTema.addEventListener("click", () => {
     trocarTema(body, botaoTema)
@@ -55,7 +58,7 @@ function montarPergunta() {
         <section class="alternativas">
             <form action="">
                 <label for="alternativa_a">
-                    <input type="radio" id="alternativa_a" name="alternativa">
+                    <input type="radio" id="alternativa_a" name="alternativa" value="${alterarSinais(quiz.questions[pergunta-1].options[0])}">
 
                     <div>
                         <span>A</span>
@@ -64,7 +67,7 @@ function montarPergunta() {
                 </label>
 
                 <label for="alternativa_b">
-                    <input type="radio" id="alternativa_b" name="alternativa">
+                    <input type="radio" id="alternativa_b" name="alternativa" value="${alterarSinais(quiz.questions[pergunta-1].options[1])}">
 
                     <div>
                         <span>B</span>
@@ -73,7 +76,7 @@ function montarPergunta() {
                 </label>
 
                 <label for="alternativa_c">
-                    <input type="radio" id="alternativa_c" name="alternativa">
+                    <input type="radio" id="alternativa_c" name="alternativa" value="${alterarSinais(quiz.questions[pergunta-1].options[2])}">
 
                     <div>
                         <span>C</span>
@@ -82,7 +85,7 @@ function montarPergunta() {
                 </label>
 
                 <label for="alternativa_d">
-                    <input type="radio" id="alternativa_d" name="alternativa">
+                    <input type="radio" id="alternativa_d" name="alternativa" value"${alterarSinais(quiz.questions[pergunta-1].options[3])}">
 
                     <div>
                         <span>D</span>
@@ -91,7 +94,7 @@ function montarPergunta() {
                 </label>
             </form>
 
-            <button>Enviar</button>
+            <button>Responder</button>
         </section>
     `
 }
@@ -100,10 +103,64 @@ function alterarSinais(texto) {
     return texto.replace(/</g, "&lt;").replace(/>/g, "&gtl;")
 }
 
+function guardarResposta(evento) {
+    resposta = evento.target.value
+    idInputResposta = evento.target.id
+
+    const botaoEnviar = document.querySelector(".alternativas button")
+    botaoEnviar.addEventListener("click", validarResposta)
+}
+
+function validarResposta() {
+    const botaoEnviar = document.querySelector(".alternativas button")
+    botaoEnviar.innerText = "próxima"
+    botaoEnviar.removeEventListener("click", validarResposta)
+
+    if (pergunta === 10) {
+        botaoEnviar.innerText = "finalizar"
+        botaoEnviar.addEventListener("click", finalizar)
+    } else {
+        botaoEnviar.addEventListener("click", proximaPergunta)
+    }
+
+    if (resposta === quiz.questions[pergunta-1].answer) {
+        document.querySelector(`label[for='$(idInputResposta)']`).setAttribute("id", "correta")
+        pontos = pontos + 1
+    } else {
+        document.querySelector(`label[for='${idInputResposta}']`).setAttribute("id", "errada")
+        document.querySelector(`label[for='${respostaCorretaId}']`).setAttribute("id", "correta")
+    }
+
+    pergunta = pergunta + 1
+}
+
+function finalizar() {
+    localStorage.setItem("pontos", pontos)
+
+    window.localcation.href = "../resultado/resultado.html"
+}
+
+function proximaPergunta() {
+    montarPergunta()
+    adicionarEventoInputs()
+}
+
+function adicionarEventoInputs() {
+    const inputsResposta = document.querySelectorAll(".alternativas input")
+    inputsResposta.forEach(input => {
+        input.addEventListener("click", guardarResposta)
+
+        if (input.value === quiz.question[pergunta-1].answer) {
+            respostaCorretaId = input.id
+        }
+    })
+}
+
 async function iniciar() {
     alterarAssunto()
     await buscarPerguntas()
-    montarPergunta()
+    montarPergunta() 
+    adicionarEventoInputs()
 }
 
 iniciar()
